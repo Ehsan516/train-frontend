@@ -5,8 +5,8 @@ const USE_MOCKS = (import.meta.env.VITE_USE_MOCKS ?? "false") === "true"; //fake
 
 export async function loginApi(payload:LoginRequest): Promise<LoginResponse> {//returns response for email/password
     if(USE_MOCKS){
-        await new Promise(r=> setTimeout(r, 5000)); //5 sec delay for fun
-        if (payload.email==="fail.@live.com"){//just for throwing error
+        await new Promise(r=> setTimeout(r, 1000)); //1 sec delay for fun
+        if (payload.email==="fail.@test.com"){//just for throwing error
             throw new Error("Invalid email or password");
         }
 
