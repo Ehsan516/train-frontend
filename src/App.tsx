@@ -3,11 +3,12 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Dashboard from "./pages/Dashboard";
 import Analytics from "./pages/Analytics";
-import { useAuth } from "./context/AuthContext"; // 👈 import our hook
+import { useAuth } from "./context/AuthContext";//import hook
+import RequireAuth from "./components/RequireAuth";
 import "./App.css";
 
 export default function App() {
-  const { user, logout } = useAuth(); // 👈 grab auth state + logout
+  const { user, logout } = useAuth();//grab auth state + logout
 
   return (
     <Router>
@@ -38,8 +39,11 @@ export default function App() {
         <Route path="/" element={<h1>Welcome to EA&apos;s training logger</h1>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/analytics" element={<Analytics />} />
+        
+        <Route
+        path="/dashboard"
+        element={<RequireAuth><Dashboard /></RequireAuth>} />
+        <Route path="/analytics" element={<RequireAuth><Analytics /></RequireAuth>} />
       </Routes>
     </Router>
   );
