@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { Session } from "../types/training";
 import { listSessions, createSession, addSet } from "../api/sessions";
 import ExercisePicker from "../components/ExercisePicker";
+import { listExercises } from "../api/exercises";
+import type { Exercise } from "../types/training";
 
 export default function Dashboard() {
   const [sessions, setSessions] = useState<Session[]>([]);//all sessions from memory
@@ -17,9 +19,15 @@ export default function Dashboard() {
   const [reps, setReps] = useState<number | "">(""); //empty for optional
   const [weightKg, setWeightKg] = useState<number | "">("");
   const [rpe, setRpe] = useState<number | "">("");
+  const[exerciseMap, setExerciseMap] = useState<Record<string, Exercise>>({});//lookup map
+
 
   useEffect(() => {
     listSessions().then(setSessions).catch(console.error);//pushes listed sessions so ui renders list
+    listExercises().then(list=>{
+      const map = Object.fromEntries(list.map(e=>[e.id, e]));
+      setExerciseMap(map);
+    });
   }, []);//empty array so runs once
 
   async function onCreateSession(e: React.FormEvent) {
@@ -125,7 +133,7 @@ export default function Dashboard() {
                 <tbody>
                   {s.sets.map((set) => (
                     <tr key={set.id}>
-                      <td>{set.exerciseId}</td>
+                      <td>{exerciseMap[set.exerciseId]?.name ?? set.exerciseId}</td>
                       <td>{set.reps ?? "-"}</td>
                       <td>{set.weightKg ?? "-"}</td>
                       <td>{set.rpe ?? "-"}</td>
