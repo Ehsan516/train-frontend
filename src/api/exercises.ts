@@ -9,7 +9,7 @@ let mockExercises: Exercise[] = [
     {id: "xDeadlift", name: "Deadlift", tags: ["hamstrings", "glutes", "erectors"], category: "strength", isCustom: false},
     {id: "xOhp", name: "Overhead Press", tags: ["delts", "triceps", "upper-back"], category: "strength", isCustom: false},
     {id: "xRow", name: "Barbell Rows", tags: ["lats", "upper-back", "biceps"], category: "strength", isCustom: false},
-    {id: "xChin", name: "Chin-up", tags: ["lats", "glutes", "forearms"], category: "strength", isCustom: false},
+    {id: "xChin", name: "Chin-up", tags: ["lats", "biceps", "forearms"], category: "strength", isCustom: false},
 ];
 
 export async function listExercises(): Promise<Exercise[]> {
