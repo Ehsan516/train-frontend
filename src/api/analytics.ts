@@ -8,13 +8,13 @@ export type PrItem = {
 };
 
 export type WeeklyVolumeItem = {
-  weekStart: string;          // "YYYY-MM-DD"
+  weekStart: string;//"YYYY-MM-DD"
   totalVolumeKg: number;
 };
 
 export type RecentSessionItem = {
   sessionId: string;
-  startedAt: string;          // ISO string
+  startedAt: string;//ISO string
   setsCount: number;
   repsCount: number;
   volumeKg: number;
